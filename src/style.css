@@ -1,0 +1,441 @@
+/* ==========================================================================
+   FESTORA 2026 — NIGHT-SKY FESTIVAL STYLESHEET
+   Design direction: deep navy night sky fading to teal, coral-pink accents,
+   yellow call-to-action buttons, tall elegant serif headings, scalloped dividers.
+   ========================================================================== */
+
+:root {
+  /* Color Palette (variable names kept so existing components keep working) */
+  --bg-darkest: #07003f;
+  --bg-primary: #0a0752;
+  --bg-surface: #0d1166;
+  --bg-card: rgba(10, 12, 80, 0.72);
+  --bg-card-hover: rgba(18, 24, 110, 0.9);
+  --bg-glass: rgba(7, 0, 63, 0.85);
+
+  --accent-purple: #ff3d7f;   /* coral pink */
+  --accent-violet: #ff6b9d;
+  --accent-pink: #ff3d7f;
+  --accent-lavender: #ffc2d6; /* soft pink */
+  --accent-cyan: #2ad4d4;
+  --accent-gold: #fbbf24;     /* festival yellow */
+  --accent-green: #5cc96b;
+  --accent-blue: #2a6fdb;
+
+  --text-primary: #ffffff;
+  --text-secondary: #d6e4ff;
+  --text-muted: #9db4e6;
+  --text-dim: #6f87c4;
+
+  --border-glass: rgba(120, 160, 255, 0.22);
+  --border-highlight: rgba(255, 107, 157, 0.55);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #ff3d7f 0%, #ff6b9d 50%, #fbbf24 100%);
+  --grad-text: linear-gradient(180deg, #ffffff 20%, #ffd6e4 100%);
+  --grad-accent-btn: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --grad-card-header: linear-gradient(180deg, rgba(255, 61, 127, 0.15) 0%, transparent 100%);
+  --grad-sky: linear-gradient(180deg, #07003f 0%, #062a73 45%, #0077b6 80%, #0096c7 100%);
+
+  /* Typography */
+  --font-display: 'Bodoni Moda', Georgia, serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-quote: 'Playfair Display', Georgia, serif;
+
+  /* Shadows & Glows */
+  --glow-purple: 0 0 30px rgba(255, 61, 127, 0.35);
+  --glow-pink: 0 0 35px rgba(255, 61, 127, 0.35);
+  --glow-yellow: 0 0 30px rgba(251, 191, 36, 0.4);
+  --shadow-card: 0 16px 36px -10px rgba(0, 0, 20, 0.6), 0 0 0 1px var(--border-glass);
+  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 20, 0.85), 0 0 30px rgba(255, 61, 127, 0.2);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--bg-darkest);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg-darkest);
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(42, 111, 219, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 10% 30%, rgba(255, 61, 127, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(42, 212, 212, 0.1) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05002e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a3a9a;
+  border-radius: var(--radius-full);
+  border: 2px solid #05002e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff3d7f;
+}
+
+/* Links & Buttons */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Keyboard focus ring (visible on every theme) */
+:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* Global Container */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Typography Helpers */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-accent {
+  font-family: var(--font-quote);
+  font-style: italic;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: var(--grad-accent-btn);
+  color: #07003f;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6);
+  filter: brightness(1.08);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.btn-outline-glow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--accent-pink);
+  color: var(--accent-lavender);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+}
+
+.btn-outline-glow:hover {
+  background: rgba(255, 61, 127, 0.2);
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 15px rgba(255, 61, 127, 0.4);
+  color: #ffffff;
+}
+
+/* Badges & Pills */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pill-purple {
+  background: rgba(255, 61, 127, 0.18);
+  border: 1px solid rgba(255, 61, 127, 0.45);
+  color: var(--accent-lavender);
+}
+
+.pill-pink {
+  background: rgba(255, 61, 127, 0.18);
+  border: 1px solid rgba(255, 61, 127, 0.45);
+  color: #ff8fb4;
+}
+
+.pill-green {
+  background: rgba(92, 201, 107, 0.18);
+  border: 1px solid rgba(92, 201, 107, 0.45);
+  color: #a6f0b0;
+}
+
+/* Section Header Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700; /* Bodoni Moda is loaded up to 700 */
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+
+.section-title span {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-desc {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* Glass Card */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-highlight);
+}
+
+/* ==========================================================================
+   DECORATIVE HELPERS (used by hero & section transitions)
+   ========================================================================== */
+
+/* Scalloped cloud edge: place at the TOP of a dark section */
+.cloud-divider {
+  height: 60px;
+  width: 100%;
+  background:
+    radial-gradient(circle at 50% 100%, var(--bg-darkest) 0 28px, transparent 29px)
+    0 0 / 56px 60px repeat-x;
+}
+
+/* Tiny twinkling stars: add class to any relatively-positioned container */
+.stars-bg {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px, #bcd4ff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 90px 120px, #ffffff 100%, transparent),
+    radial-gradient(1px 1px at 160px 60px, #9fc4ff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 230px 160px, #ffffff 100%, transparent);
+  background-size: 260px 200px;
+}
+
+/* ==========================================================================
+   SWEETALERT2 CUSTOM THEMING
+   ========================================================================== */
+
+.festora-swal-popup {
+  background: #0a0752 !important;
+  border: 1px solid rgba(255, 107, 157, 0.4) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 20, 0.9), 0 0 30px rgba(255, 61, 127, 0.25) !important;
+  padding: 24px !important;
+}
+
+.festora-swal-title {
+  font-family: var(--font-display) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1.6rem !important;
+}
+
+.festora-swal-html {
+  color: var(--text-secondary) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+}
+
+.festora-swal-confirm-btn {
+  background: var(--grad-accent-btn) !important;
+  color: #07003f !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  padding: 12px 28px !important;
+  box-shadow: 0 4px 18px rgba(251, 191, 36, 0.45) !important;
+  border: none !important;
+  outline: none !important;
+  transition: transform 0.2s ease !important;
+}
+
+.festora-swal-confirm-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(251, 191, 36, 0.65) !important;
+}
+
+.festora-swal-cancel-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #d6e4ff !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Respect users who turn animations off */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .section-header {
+    margin-bottom: 35px;
+  }
+}
+
+/* Neater, steady numbers for countdown & stats */
+.font-display,
+.section-title {
+  font-variant-numeric: lining-nums tabular-nums;
+}
